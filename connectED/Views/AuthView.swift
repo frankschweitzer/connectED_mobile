@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AuthView: View {
-    @State private var isRegistering = false  // Toggles between login & register
+    @State private var isRegistering = false
     
     var body: some View {
         VStack {

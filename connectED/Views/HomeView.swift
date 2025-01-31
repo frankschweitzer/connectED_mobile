@@ -11,11 +11,18 @@ struct HomeView: View {
     @EnvironmentObject private var authViewModel: AuthViewModel
     
     var body: some View {
-        VStack {
-            Text("WELCOME \(authViewModel.user?.displayName ?? "")")
-                .padding()
-            Button("Logout") {
-                authViewModel.logout()
+        TabView {
+            
+            Tab("Explore", systemImage: "folder") {
+                ExploreView(exploreViewModel: ExploreViewModel())
+            }
+            
+            Tab("For You", systemImage: "pencil") {
+                FeedView()
+            }
+            
+            Tab("Settings", systemImage: "person") {
+                SettingsView()
             }
         }
     }
