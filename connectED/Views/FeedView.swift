@@ -9,8 +9,19 @@ import SwiftUI
 
 struct FeedView: View {
     var body: some View {
-        VStack {
-            Text("FEED ")
+        ZStack {
+            FeedBackgroundView()
+            
+            VStack {
+                Text("FEED ")
+            }
         }
+    }
+}
+
+struct FeedBackgroundView: View {
+    var body: some View {
+        LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.7), Color.purple.opacity(0.6)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            .edgesIgnoringSafeArea(.all)
     }
 }

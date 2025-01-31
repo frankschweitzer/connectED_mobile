@@ -9,21 +9,42 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var authViewModel: AuthViewModel
+    @State private var selectedTab = 0
+    @StateObject private var exploreViewModel = ExploreViewModel()
     
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
+            ExploreView(exploreViewModel: exploreViewModel)
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                        .renderingMode(.template)
+                        .foregroundColor(selectedTab == 0 ? .black : .white)
+                    Text("Explore")
+                }
+                .tag(0)
             
-            Tab("Explore", systemImage: "folder") {
-                ExploreView(exploreViewModel: ExploreViewModel())
-            }
+            FeedView()
+                .tabItem {
+                    Image(systemName: "heart.fill")
+                        .renderingMode(.template)
+                        .foregroundColor(selectedTab == 1 ? .black : .white)
+                    Text("For You")
+                }
+                .tag(1)
             
-            Tab("For You", systemImage: "pencil") {
-                FeedView()
-            }
-            
-            Tab("Settings", systemImage: "person") {
-                SettingsView()
-            }
+            SettingsView()
+                .tabItem {
+                    Image(systemName: "gearshape.fill")
+                        .renderingMode(.template)
+                        .foregroundColor(selectedTab == 2 ? .black : .white)
+                    Text("Settings")
+                }
+                .tag(2)
         }
+        .accentColor(.black)
+        .onAppear {
+            UITabBar.appearance().unselectedItemTintColor = UIColor.white
+        }
+        .toolbarBackground(.clear, for: .tabBar)
     }
 }
